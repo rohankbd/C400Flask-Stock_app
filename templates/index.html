@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Data</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        p {
+            color: #7f8c8d;
+        }
+        form {
+            background-color: #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        label, input {
+            font-size: 16px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #bdc3c7;
+            border-radius: 4px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            margin: 10px 0;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .stock-quote, .stock-news {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Check A-Z about a stock!</h1>
+    <p>We source our data from reputed sites :)</p>
+
+    <form method="POST">
+        <label for="symbol">Stock Symbol:</label>
+        <input type="text" id="symbol" name="symbol" placeholder="e.g. AAPL,MSFT,TSLA,GOOGL" required>
+        <button type="submit">Get Quote</button>
+    </form>
+
+    {% if stock_data %}
+        {% if stock_data.error %}
+            <p>{{ stock_data.error }}</p>
+        {% else %}
+            <div class="stock-quote">
+                <h2>Stock Quote</h2>
+                <ul>
+                    <li><strong>Symbol:</strong> {{ stock_data['data'][0]['ticker'] }}</li>
+                    <li><strong>Name:</strong> {{ stock_data['data'][0]['name'] }}</li>
+                    <li><strong>Latest Price:</strong> {{ stock_data['data'][0]['price'] }}</li>
+                    <li><strong>Today's Open:</strong> {{ stock_data['data'][0]['day_open'] }}</li>
+                    <li><strong>Today's High:</strong> {{ stock_data['data'][0]['day_high'] }}</li>
+                    <li><strong>Today's Low:</strong> {{ stock_data['data'][0]['day_low'] }}</li>
+                </ul>
+            </div>
+        {% endif %}
+    {% endif %}
+
+    {% if news_data %}
+        {% if news_data.error %}
+            <p>{{ news_data.error }}</p>
+        {% else %}
+            <div class="stock-news">
+                <h2>Stock News</h2>
+                <ul>
+                    <li><a href="{{ news_data['data'][0]['url'] }}" target="_blank">{{ news_data['data'][0]['title'] }}</a><br>
+                    {{ news_data['data'][0]['snippet'] }}</li>
+                    <br>
+                    <li><a href="{{ news_data['data'][1]['url'] }}" target="_blank">{{ news_data['data'][1]['title'] }}</a><br>
+                    {{ news_data['data'][1]['snippet'] }}</li>
+                </ul>
+            </div>
+        {% endif %}
+    {% endif %}
+</body>
+</html>
