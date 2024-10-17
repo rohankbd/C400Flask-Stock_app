@@ -3,7 +3,7 @@ import templates
 import requests
 from datetime import date
 
-app = Flask("app")
+app = Flask(__name__)
 
 API_KEY = 'VXBa0hBIQMgmRuzXUEvydOUx95YTRhrcuYlxyxbS'
 API_URL = 'https://api.stockdata.org/v1/data/quote'
