@@ -42,4 +42,5 @@ def index():
 
     return render_template('index.html', stock_data=stock_data, news_data=news_data)
 
-app.run(port=5001)
+app.run(host='0.0.0.0', port=5001)
+
