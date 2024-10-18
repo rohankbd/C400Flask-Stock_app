@@ -30,24 +30,28 @@ Before you can run the project, make sure you have:
 ```bash
 git clone https://github.com/your-username/flask-stock-app.git
 cd flask-stock-app
+```
 
 ### 2. Build the Docker image:
-docker build -t flask-stock-app .
-```bash
-
-## OR
+```
+docker build -t flask-stock-app . 
+```
+### OR
 
 ### Using docker pull:
+```
 docker pull rohanskbd/flask-stock-app:latest
+```
 
 ### Build docker image:
+```
 docker run -p 5000:5000 your-dockerhub-username/flask-stock-app
+```
 
 ### Key Sections:
 - **Project overview and features.**
 - **Technologies used and prerequisites.**
 - **Step-by-step instructions on how to build, run, and deploy the Docker container.**
 - **Docker commands for building and running the container.**
-- **Acknowledgments and license information.**
 
 This README file should help others understand how to set up and run your Flask app using Docker.
