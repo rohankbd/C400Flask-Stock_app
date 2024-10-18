@@ -33,6 +33,7 @@ cd flask-stock-app
 
 ### 2. Build the Docker image:
 docker build -t flask-stock-app .
+```bash
 
 ## OR
 
